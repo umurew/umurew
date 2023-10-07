@@ -1,11 +1,8 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
-
-local InteractShop = ReplicatedStorage:WaitForChild("InteractShop")
-local RemoveShop = ReplicatedStorage:WaitForChild("RemoveShop")
-local PurchaseAmount = ReplicatedStorage:WaitForChild("PurchaseAmount")
-local GiveTool = ReplicatedStorage:WaitForChild("GiveTool")
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
 
 local CellColorChangeDuration = 1.5
 local CellColors = {
@@ -15,68 +12,75 @@ local CellColors = {
 	["Default"] = Color3.fromRGB(0, 0, 0)
 }
 
-local TemplateGUI = script.TemplateShopGUI
-local Items = script.Items:GetChildren()
-local Tools = ReplicatedStorage:WaitForChild("Tools")
+local ValidateTool = ReplicatedStorage:WaitForChild("ValidateTool")
 
 local PartTweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Circular, Enum.EasingDirection.Out, 0, false)
 local ColorTweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Circular, Enum.EasingDirection.Out, 0, false)
 
-local function DestroyGUI ()
-	local PlayerGui = script.Parent
-	if PlayerGui:FindFirstChild("ShopGUI") then PlayerGui["ShopGUI"]:Destroy() end
-end
+local TemplateGUI = script.TemplateShopGUI
+local TemplateCell = script.TemplateCell
+local Items = script.Items
 
-local function GenerateGUI()
+local function GenerateGUI ()
 	local CloneGUI = TemplateGUI:Clone()
 	CloneGUI.Name = "ShopGUI"
-
-	for i, v in pairs(Items) do
-		local CloneCell = script.TemplateCell:Clone()
-		CloneCell.Name = "ItemFrame_" .. v.Name
-		CloneCell.TextLabel.Text = "[" .. v.Name .. "]"
-		CloneCell.Parent = CloneGUI.MainFrame.ItemsFrame
-
-		local Camera = Instance.new("Camera")
-		Camera.Parent = CloneCell.ViewportFrame
-		Camera.Name = "VCamera"
-		Camera.CFrame = CFrame.new(Vector3.new(0, 0, 1.2)) * CFrame.fromEulerAnglesXYZ(math.rad(10), 0, 0)
-		Camera.CameraType = Enum.CameraType.Scriptable
-
-		CloneCell.ViewportFrame.CurrentCamera = Camera
-
-		local CloneItem = v:Clone()
-		CloneItem.Parent = Camera
-		CloneItem.CFrame = CloneItem["CameraFrame"].Value
+	
+	local ItemsFrame = CloneGUI.MainFrame.ItemsFrame
+	
+	local Player = Players.LocalPlayer
+	local Character = Player.Character
+	
+	for Index, Item in pairs(Items:GetChildren()) do
+		local CloneCell = TemplateCell:Clone()
+		CloneCell.Name = Item.Name
+		CloneCell.TextLabel.Text = "[" .. Item.Name .. "]"
+		CloneCell.Parent = ItemsFrame
 		
-		local DefaultCameraSpin = 2
-		if CloneItem:FindFirstChild("CameraSpin") then
-			DefaultCameraSpin = CloneItem["CameraSpin"].Value
-		end
-		if CloneItem:FindFirstChild("CameraSize") then
-			CloneItem.Size = CloneItem["CameraSize"].Value
-		end
+		local ViewportFrame = CloneCell.ViewportFrame
 		
-		RunService.Heartbeat:Connect(function()
-			if CloneItem:FindFirstChild("IsYAxis") and CloneItem:FindFirstChild("IsYAxis").Value == true then
-				CloneItem.CFrame = CloneItem.CFrame * CFrame.fromEulerAnglesXYZ(0, math.rad(DefaultCameraSpin), 0)
-			elseif CloneItem:FindFirstChild("IsXAxis") and CloneItem:FindFirstChild("IsXAxis").Value == true then
-				CloneItem.CFrame = CloneItem.CFrame * CFrame.fromEulerAnglesXYZ(math.rad(DefaultCameraSpin), 0, 0)
-			elseif CloneItem:FindFirstChild("IsZAxis") and CloneItem:FindFirstChild("IsZAxis").Value == true then
-				CloneItem.CFrame = CloneItem.CFrame * CFrame.fromEulerAnglesXYZ(0, 0, math.rad(DefaultCameraSpin))
+		local ViewportCamera = Instance.new("Camera", ViewportFrame)
+		ViewportCamera.CameraType = Enum.CameraType.Scriptable
+		
+		ViewportFrame.CurrentCamera = ViewportCamera
+		
+		local CloneItem : Model = Item:Clone()
+		CloneItem.Name = "ViewportItem_" .. CloneItem.Name
+		CloneItem.Parent = ViewportCamera
+		
+		ViewportCamera.CameraSubject = CloneItem
+		ViewportCamera.CFrame = CFrame.new(Vector3.new(0, 0.3, 1.2)) * CFrame.fromEulerAnglesXYZ(math.rad(0), 0, 0)
+		
+		local ItemProperties = CloneItem:WaitForChild("Properties")
+		local ViewportCFrame = ItemProperties:FindFirstChild("ViewportCFrame")
+		local ViewportSize = ItemProperties:FindFirstChild("ViewportSize")
+		local ViewportSpin = ItemProperties:FindFirstChild("ViewportSpin")
+		local ViewportAxis = ItemProperties:FindFirstChild("ViewportAxis")
+		local ItemCost = ItemProperties:FindFirstChild("ItemCost")
+		local ItemDescription = ItemProperties:FindFirstChild("ItemDescription")
+		
+		CloneItem.CFrame = ViewportCFrame.Value
+		CloneItem.Size = ViewportSize.Value
+		
+		RunService.Heartbeat:Connect(function(DeltaTime)
+			if ViewportAxis.Value == "X" then
+				CloneItem.CFrame = CloneItem.CFrame * CFrame.fromEulerAnglesXYZ(math.rad(ViewportSpin.Value), 0, 0)
+			elseif ViewportAxis.Value == "Y" then
+				CloneItem.CFrame = CloneItem.CFrame * CFrame.fromEulerAnglesXYZ(0, math.rad(ViewportSpin.Value), 0)
+			elseif ViewportAxis.Value == "Z" then
+				CloneItem.CFrame = CloneItem.CFrame * CFrame.fromEulerAnglesXYZ(0, 0, math.rad(ViewportSpin.Value))
 			end
 		end)
 		
 		CloneCell.MouseEnter:Connect(function()
 			local Tween1PropertyTable = {Position = Vector3.new(CloneItem.Position.X, CloneItem.Position.Y + 0.15, CloneItem.Position.Z)}
-			local Tween2PropertyTable = {Position = CloneItem["CameraFrame"].Value.Position}
-			
+			local Tween2PropertyTable = {Position = ViewportCFrame.Value.Position}
+
 			local Tween1 = TweenService:Create(CloneItem, PartTweenInfo, Tween1PropertyTable)
 			local Tween2 = TweenService:Create(CloneItem, PartTweenInfo, Tween2PropertyTable)
-			
+
 			Tween2:Pause()
 			Tween1:Play()
-			
+
 			CloneCell.MouseLeave:Connect(function()
 				Tween1:Pause()
 				Tween2:Play()
@@ -91,38 +95,46 @@ local function GenerateGUI()
 		}
 		
 		CloneCell.UIStroke:GetPropertyChangedSignal("Color"):Connect(function()
-			for Index2, Value2 : Tween in pairs(CellTweens) do
-				if Value2.PlaybackState == Enum.PlaybackState.Playing then
-					Value2.Completed:Wait()
+			for Index2, Tween in pairs(CellTweens) do
+				if Tween.PlaybackState == Enum.PlaybackState.Playing then
+					Tween.Completed:Wait()
 				end
 			end
 			task.wait(CellColorChangeDuration)
-			
+
 			CellTweens.ToDefault:Play()
 		end)
 		
 		CloneCell.InputBegan:Connect(function(Input)
-			CellTweens.ToDefault:Pause()
-			
 			if Input.UserInputType == Enum.UserInputType.MouseButton1 then
-				if Tools:FindFirstChild(CloneItem.Name) then
-					local Price = CloneItem["Price"]
-					PurchaseAmount:FireServer("Cash", Price.Value)
+				local ProcessHash = HttpService:GenerateGUID(true)
+				
+				for Index2, Tween : Tween in pairs(CellTweens) do
+					if Tween.PlaybackState == Enum.PlaybackState.Playing then return end
+				end
+
+				ValidateTool:FireServer(CloneItem.Name, ItemCost.Value, ProcessHash)
+				
+				ValidateTool.OnClientEvent:Connect(function(Respond, HashGUID)
+					--if ProcessHash ~= HashGUID then Player:Kick("Hash GUID did not match. An unexpected error.") end
 					
-					PurchaseAmount.OnClientEvent:Connect(function(Succeed)
-						if Succeed then
-							GiveTool:FireServer(CloneItem.Name)
-							CellTweens.ToSucceed:Play()
-						else warn("Insufficient cash! POOR!") CellTweens.ToFail:Play() end
-					end)
-				else warn("Requested item is out of stock") CellTweens.ToNoStock:Play() end
+					if Respond["Status"] == "Succeed" then
+						CellTweens.ToSucceed:Play()
+						print(Respond["Message"])
+					elseif Respond["Status"] == "Fail" then
+						CellTweens.ToFail:Play()
+						warn(Respond["Message"])
+					elseif Respond["Status"] == "NoStock" then
+						CellTweens.ToNoStock:Play()
+						warn(Respond["Message"])
+					end
+				end)
 			end
 		end)
 	end
-
+	
+	CloneGUI.Parent = Player.PlayerGui
 	CloneGUI.Enabled = true
-	CloneGUI.Parent = script.Parent
 end
 
-InteractShop.OnClientEvent:Connect(GenerateGUI)
-RemoveShop.OnClientEvent:Connect(DestroyGUI)
+GenerateGUI()
