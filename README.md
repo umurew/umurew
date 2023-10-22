@@ -1,5 +1,5 @@
 # 💫 About Me:
-Working on software engineering as hobby. My primary language is C# but I also know Lua, C++, HTML5 and CSS too.
+14 years old highschool student. Planning to study Software Engineering in universty.
 
 
 ## 🌐 Socials:
