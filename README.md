@@ -1,5 +1,5 @@
 # 💫 About Me:
-14 years old highschool student. Planning to study Software Engineering in universty.
+16 years old highschool student. Planning to study Software Engineering in universty.
 
 
 ## 🌐 Socials:
