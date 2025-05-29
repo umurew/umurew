@@ -5,6 +5,8 @@
 ### my hobbies
 * i love to play games & sports.
 * i also very like to walk (at a strange amount)
+* i am a Red Bull fanatic
+* i like Verstappen, Vettel, Ricciardio, Piastri and more
 ### my personality
 * i am honest as fuck, like i call it Brutal Honesty.
 * umm.. i've born with english & my native is Turkish.
