@@ -8,7 +8,6 @@
 * i am a Red Bull fanatic
 * i like Verstappen, Vettel, Ricciardio, Piastri and more
 ### my personality
-* i am honest as fuck, like i call it Brutal Honesty.
 * umm.. i've born with english & my native is Turkish.
 * my grades are usually high, something like >80/100 probably.
 * i am a hardworker & ngl poor as fuck.
