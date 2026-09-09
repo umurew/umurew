@@ -16,5 +16,5 @@ Currently studying for national university exams.
 - **Languages:** I'm bilingual in English and Turkish (which is my native language).
 
 <p align="center">
-  <img src="https://github-readme-tech-stack.vercel.app/api/cards?align=center&titleAlign=center&showBorder=false&lineCount=1&hideBg=true&hideTitle=true&bg=%230D1117&badge=%23161B22&border=%2321262D&titleColor=%2358A6FF&line1=unity%2CUnity%2CFFFFFF%3Bgit%2CGit%2CF03C2E%3Bblender%2CBlender%2CE87D0D%3Bdotnet%2C.NET%2C512BD4%3B" alt="My Tech Stack" />
+  <img src="https://github-readme-tech-stack.vercel.app/api/cards?title=umurew%27s+Tech+Stack&align=center&titleAlign=center&showBorder=false&lineCount=1&hideBg=true&hideTitle=true&line1=unity%2CUnity%2CFFFFFF%3Bgit%2CGit%2CF03C2E%3Bblender%2CBlender%2CE87D0D%3Bsharp%2CCSharp%2C2885F1%3Brust%2CRust%2C000000%3B" alt="My Tech Stack" />
 </p>
