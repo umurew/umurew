@@ -1,20 +1,27 @@
-# Hello World!
+# *Hello World!*
 
-I am an 12th-grade student focused on mathematics, software development and exploring low-level systems. I prefer to focus on building modular tools, framework architecture and learning how hardware and software interact.
+I'm a 12th-grade student who loves mathematics, writing code, and tinkering with software. I'm all about developing projects that I will probably abandon, figuring out software architecture and overengineering modular systems and trying to understand how hardware and software actually interact (I couldn't proceed with the Arithmetic Logic Unit yet). And not to forget, I'm an open-source freak.
 
-Currently studying for national university exams.
+Right now, my main focus is preparing for the national university exams, but I still sneak in time to build and research things that do not matter for anyone.
 
-## Current Areas of Exploration
+### What I'm Tinkering With
 
-- **Desktop & Engine Architecture:** Currently working with C# within Unity and WinUI 3 to develop both Unity projects and custom desktop softwares.
-- **Low-Level & Hardware Interests:** Expanding into embedded systems, 3D fabrication and exploring the C family of languages to better understand how programming actually works.
+- **Cross-Platform & Desktop Stuff:** Switched over to Linux. I'm setting my sights on **Qt (C++)** to build custom desktop tools down the road, while still keeping my hands in C# and Unity.
+- **Low-Level & Hardware:** Digging into the **C family (C / C++)**, exploring how memory works, looking at embedded systems, and dabbling in 3D fabrication.
 
-## When I'm Not Coding
+### When I'm Not Coding
 
-- **Formula 1:** Following the races whenever I get the chance. I'm a massive Verstappen fanatic, but I also love Vettel, Ricciardo and Piastri.
-- **Walking:** I really love walking. I often clear my head with relatively long-distance walking.
-- **Languages:** I'm bilingual in English and Turkish (which is my native language).
+- **Formula 1:** Can't say that I can follow it daily but I definitely love it. Verstappen is my guy, but I've got a lot of love for Vettel, Ricciardo, and Piastri too.
+- **Walking:** Long walks are my ultimate way to clear my head and untangle tricky bugs.
+- **Languages:** Fluent in Turkish [mother tongue (cool way to say that)] and English.
+
+---
 
 <p align="center">
-  <img src="https://github-readme-tech-stack.vercel.app/api/cards?title=umurew%27s+Tech+Stack&align=center&titleAlign=center&showBorder=false&lineCount=1&hideBg=true&hideTitle=true&line1=unity%2CUnity%2CFFFFFF%3Bgit%2CGit%2CF03C2E%3Bblender%2CBlender%2CE87D0D%3Bsharp%2CCSharp%2C2885F1%3Brust%2CRust%2C000000%3B" alt="My Tech Stack" />
+  <img src="https://img.shields.io/badge/Unity-101010?style=for-the-badge&logo=unity&logoColor=white" alt="Unity" />
+  <img src="https://img.shields.io/badge/JetBrains-000000?style=for-the-badge&logo=jetbrains&logoColor=white" alt="JetBrains" />
+  <img src="https://img.shields.io/badge/Git-F03C2E?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
+  <img src="https://img.shields.io/badge/Blender-E87D0D?style=for-the-badge&logo=blender&logoColor=white" alt="Blender" />
+  <img src="https://img.shields.io/badge/Fedora-51A2DA?style=for-the-badge&logo=fedora&logoColor=white" alt="Fedora" />
+  <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white" alt="C#" />
 </p>
