@@ -22,6 +22,6 @@ Right now, my main focus is preparing for the national university exams, but I s
   <img src="https://img.shields.io/badge/JetBrains-000000?style=for-the-badge&logo=jetbrains&logoColor=white" alt="JetBrains" />
   <img src="https://img.shields.io/badge/Git-F03C2E?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
   <img src="https://img.shields.io/badge/Blender-E87D0D?style=for-the-badge&logo=blender&logoColor=white" alt="Blender" />
-  <img src="https://img.shields.io/badge/Fedora-51A2DA?style=for-the-badge&logo=fedora&logoColor=white" alt="Fedora" />
+  <img src="https://img.shields.io/badge/CachyOS-00AA88?style=for-the-badge&logo=cachyos&logoColor=white" alt="CachyOS" />
   <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white" alt="C#" />
 </p>
